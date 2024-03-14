@@ -1,4 +1,4 @@
-// TopBar.js
+import '../styles/TopBar.css'; // Import the CSS file for styling
 
 import React from 'react';
 

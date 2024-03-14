@@ -1,42 +1,37 @@
 /* UserTable.css */
 .user-table {
-  width: 100%;
+  width: 90%; 
   border-collapse: collapse;
-  margin-bottom: 20px; /* Add some margin below the table */
+  margin: 20px auto; /* Center the table and add some margin */
 }
 
 .user-table th,
 .user-table td {
-  padding: 8px;
+  padding: 12px; /* Increase padding for a more spacious look */
   text-align: left;
   border-bottom: 1px solid #ccc; /* Faint grey line separating rows */
 }
 
 .user-table th {
-  background-color: #f2f2f2; /* Light grey background for table header */
+  background-color: #333; /* Dark background for a sleek look */
+  color: #fff; /* White text for contrast */
 }
 
-.user-table h2 {
-  text-align: left;
+.search-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .search-input {
-  margin-bottom: 10px; /* Add some space below the search input */
-}
-
-.search-input input {
-  padding: 8px;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 10px;
+  width: 200px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  margin-bottom: 0px; /* Add some space below the input */
+  margin-right:80px;
 }
 
-.no-results {
-  color: red;
-  font-style: italic;
-}
 
 .new-user-button-container {
   display: flex;
@@ -45,15 +40,48 @@
 }
 
 .new-user-button-container button {
-  padding: 10px 20px; /* Adjust padding as needed */
+  padding: 10px 20px; 
   border: none;
   border-radius: 5px; /* Roundish corners */
   background-color: #007bff; /* Blue color */
   color: #fff; /* White text */
   cursor: pointer;
   transition: background-color 0.3s ease; /* Smooth transition */
+  margin-right:170px;
 }
 
 .new-user-button-container button:hover {
   background-color: #0056b3; /* Darker blue on hover */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:-30px;
+}
+
+.header-container h2{
+  margin-left:80px;
 }

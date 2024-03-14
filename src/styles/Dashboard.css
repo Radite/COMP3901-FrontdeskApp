@@ -12,9 +12,10 @@ header {
 
 .checkouts,
 .check-ins {
-  width: 100%;
+  width: 97%;
   border: 1px solid black;
   padding: 10px;
+  margin-right: 30px;
 }
 
 .current-time,
@@ -81,6 +82,7 @@ header {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px; /* Add some margin between tables */
+  max-width: 100%;
 }
 
 .checkins-table th,
@@ -100,3 +102,4 @@ header {
 .check-ins h2 {
   text-align: left;
 }
+

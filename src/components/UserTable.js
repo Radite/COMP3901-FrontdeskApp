@@ -64,14 +64,20 @@ const UserTable = () => {
 
     return (
         <div>
+            <div className="header-container">
             <h2>User List</h2>
             {/* Search input */}
-            <input
-                type="text"
-                placeholder="Search by name..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-            />
+            <div className="search-container">
+                <input
+                    className="search-input"
+                    type="text"
+                    placeholder="Search by name..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            </div>
+
 
             {isFormOpen && <NewUserForm onClose={toggleForm} />}
             <table className="user-table">

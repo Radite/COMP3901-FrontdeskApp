@@ -18,12 +18,14 @@ function App() {
     <Router>
       <div className={`App ${isSidePanelOpen ? 'side-panel-opened' : ''}`}>
         <SidePanel isOpen={isSidePanelOpen} toggleSidePanel={toggleSidePanel} />
+
         <main className="main-content">
-          <TopBar toggleSidePanel={toggleSidePanel} />
+        <TopBar toggleSidePanel={toggleSidePanel} isSidePanelOpen={isSidePanelOpen} />
+
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/users" element={<UserTable />} />
-            <Route path="/activity" element = {<GymActivity/>} />
+            <Route path="/activity" element={<GymActivity />} />
           </Routes>
         </main>
       </div>
