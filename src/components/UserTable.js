@@ -30,7 +30,7 @@ const UserTable = () => {
     const usersPerPage = 10;
 
     // New user form state
-    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [newUserWindow, setNewUserWindow] = useState(null);
 
     // Handle search query change
     const handleSearchChange = event => {
@@ -57,10 +57,34 @@ const UserTable = () => {
     // Pagination - Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    // Function to toggle new user form
-    const toggleForm = () => {
-        setIsFormOpen(!isFormOpen);
-    };
+  // Function to open/close new user form in a new window
+// Function to open/close new user form in a new window
+const toggleForm = () => {
+    const windowFeatures = 'width=400,height=400,resizable,scrollbars=yes';
+
+    if (newUserWindow && !newUserWindow.closed) {
+        newUserWindow.close();
+        setNewUserWindow(null);
+    } else {
+        const newWindow = window.open('', 'New User', windowFeatures);
+
+        if (newWindow) {
+            newWindow.document.title = 'New User';
+            // Render the new user form in the new window
+            const formContainer = newWindow.document.createElement('div');
+            formContainer.setAttribute('id', 'newUserForm');
+            newWindow.document.body.appendChild(formContainer);
+
+            const newUserForm = document.getElementById('newUserFormContainer').cloneNode(true);
+            newUserForm.style.display = 'block';
+            formContainer.appendChild(newUserForm);
+
+            setNewUserWindow(newWindow);
+        } else {
+            console.error('Failed to open new window. Popup blocker may be enabled.');
+        }
+    }
+};
 
     return (
         <div>
@@ -79,7 +103,6 @@ const UserTable = () => {
             </div>
 
 
-            {isFormOpen && <NewUserForm onClose={toggleForm} />}
             <table className="user-table">
                 <thead>
                     <tr>
@@ -113,6 +136,10 @@ const UserTable = () => {
             </div>
             <div className="new-user-button-container">
                 <button onClick={toggleForm}>New User</button>
+            </div>
+                        {/* New User Form Container */}
+                        <div id="newUserFormContainer" style={{ display: 'none' }}>
+                {newUserWindow && <NewUserForm onClose={toggleForm} />}
             </div>
 
         </div>
