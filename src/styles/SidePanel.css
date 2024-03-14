@@ -1,0 +1,51 @@
+.side-panel {
+  width: 50px; /* Initial width of the side panel */
+  height: 100vh; /* Full height of the viewport */
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease;
+  z-index: 1000; /* Ensure side panel is above other content */
+}
+
+.side-panel.expanded {
+  width: 200px; /* Expanded width of the side panel */
+}
+
+/* Background blur effect when side panel is expanded */
+.side-panel.expanded ~ .content {
+  filter: blur(5px); /* Adjust blur strength as needed */
+  transform: translateX(200px); /* Push content over by the width of the side panel */
+}
+
+.toggle-btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 30px 20px; /* Adjust padding for more space between icons */
+}
+
+.item i {
+  margin-right: 10px;
+}
+
+.item span {
+  display: none;
+}
+
+.expanded .item span {
+  display: inline;
+}
+

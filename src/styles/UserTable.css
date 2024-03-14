@@ -1,0 +1,59 @@
+/* UserTable.css */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Add some margin below the table */
+}
+
+.user-table th,
+.user-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ccc; /* Faint grey line separating rows */
+}
+
+.user-table th {
+  background-color: #f2f2f2; /* Light grey background for table header */
+}
+
+.user-table h2 {
+  text-align: left;
+}
+
+.search-input {
+  margin-bottom: 10px; /* Add some space below the search input */
+}
+
+.search-input input {
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.no-results {
+  color: red;
+  font-style: italic;
+}
+
+.new-user-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -30px; /* Adjust margin-top as needed */
+}
+
+.new-user-button-container button {
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  border-radius: 5px; /* Roundish corners */
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* White text */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.new-user-button-container button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

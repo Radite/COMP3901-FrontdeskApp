@@ -1,0 +1,102 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+header {
+  display: flex;
+  width: 100%;
+}
+
+.checkouts,
+.check-ins {
+  width: 100%;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.current-time,
+.gym-capacity {
+  position: relative; 
+  width: 200px;
+  height: 100px;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the left */
+}
+
+.current-time {
+  background-color: white;
+  color: black;
+}
+
+.gym-capacity {
+  background-color: #484444;
+  color: white;
+}
+
+/* Align items within sections */
+.current-time h2,
+.gym-capacity h2,
+.current-time p,
+.gym-capacity p {
+  margin: 0;
+}
+
+/* Adjust padding for inner elements */
+.current-time p,
+.gym-capacity p {
+  padding-top: 10px;
+}
+
+.current-time {
+  width: 200px;
+  height: 100px;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  color: black;
+  border: 2px solid #ccc; /* Light grey border outline */
+  margin-right:40px;
+}
+
+.icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Dashboard.css */
+.checkins-table,
+.checkouts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Add some margin between tables */
+}
+
+.checkins-table th,
+.checkins-table td,
+.checkouts-table th,
+.checkouts-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ccc; /* Faint grey line separating rows */
+}
+
+.checkins-table th,
+.checkouts-table th {
+  background-color: #f2f2f2; /* Light grey background for table header */
+}
+
+.check-ins h2 {
+  text-align: left;
+}
