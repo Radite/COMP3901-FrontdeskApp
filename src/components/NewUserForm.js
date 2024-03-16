@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const NewUserForm = ({ addUser }) => {
+const NewUserForm = ({ addUser, onClose }) => {
     const [formData, setFormData] = useState({
         username: '',
         role: '',
@@ -89,6 +89,7 @@ const NewUserForm = ({ addUser }) => {
                 </div>
                 <button type="submit">Create User</button>
             </form>
+            <button onClick={onClose}>Close</button>
         </div>
     );
 };

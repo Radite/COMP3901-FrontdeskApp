@@ -57,7 +57,6 @@ const UserTable = () => {
     // Pagination - Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  // Function to open/close new user form in a new window
 // Function to open/close new user form in a new window
 const toggleForm = () => {
     const windowFeatures = 'width=400,height=400,resizable,scrollbars=yes';
@@ -70,6 +69,10 @@ const toggleForm = () => {
 
         if (newWindow) {
             newWindow.document.title = 'New User';
+
+            // Clear existing content if any
+            newWindow.document.body.innerHTML = '';
+
             // Render the new user form in the new window
             const formContainer = newWindow.document.createElement('div');
             formContainer.setAttribute('id', 'newUserForm');
@@ -79,6 +82,7 @@ const toggleForm = () => {
             newUserForm.style.display = 'block';
             formContainer.appendChild(newUserForm);
 
+            // Ensure that newUserWindow is properly set
             setNewUserWindow(newWindow);
         } else {
             console.error('Failed to open new window. Popup blocker may be enabled.');

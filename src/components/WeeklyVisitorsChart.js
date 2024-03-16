@@ -1,25 +1,24 @@
 // WeeklyVisitorsChart.js
 import React from 'react';
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 function WeeklyVisitorsChart() {
   const data = [
-    {name: 'Mon', visitors: 4000},
-    {name: 'Tue', visitors: 3000},
-    {name: 'Wed', visitors: 2000},
-    {name: 'Thu', visitors: 2780},
-    {name: 'Fri', visitors: 1890},
-    {name: 'Sat', visitors: 2390},
-    {name: 'Sun', visitors: 3490},
+    { name: 'Mon', visitors: 4000 },
+    { name: 'Tue', visitors: 3000 },
+    { name: 'Wed', visitors: 2000 },
+    { name: 'Thu', visitors: 2780 },
+    { name: 'Fri', visitors: 1890 },
+    { name: 'Sat', visitors: 2390 },
+    { name: 'Sun', visitors: 3490 },
   ];
 
   return (
     <div className="WeeklyVisitorsChart">
       <h2>Weekly Visitors</h2>
-      {/*
       <BarChart
-        width={500}
-        height={300}
+        width={800}
+        height={250}
         data={data}
         margin={{
           top: 5, right: 30, left: 20, bottom: 5,
@@ -32,7 +31,6 @@ function WeeklyVisitorsChart() {
         <Legend />
         <Bar dataKey="visitors" fill="#8884d8" />
       </BarChart>
-      */}
     </div>
   );
 }

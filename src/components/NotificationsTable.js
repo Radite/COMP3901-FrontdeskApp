@@ -6,6 +6,20 @@ function NotificationsTable() {
   const notifications = [
     {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
     {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
+    {id: 1, type: 'Checkout Alert', details: 'John Brown’s checkout is approaching at 11:25PM'},
+    {id: 2, type: 'Capacity Alert', details: 'Gym is approaching capacity'},
     // ... more data
   ];
 
