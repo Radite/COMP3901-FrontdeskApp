@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link component from React Router
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation hooks from React Router
 import '../styles/SidePanel.css'; // Import the CSS file for styling
+
 
 const SidePanel = ({ isOpen, toggleSidePanel }) => {
   const [expanded, setExpanded] = useState(isOpen);
+  const location = useLocation();
+
+   // Close the side panel when navigating to a new page
+   useEffect(() => {
+    setExpanded(false);
+  }, [location]);
 
   const togglePanel = () => {
     setExpanded(!expanded);
     toggleSidePanel();
   };
+
+    // Check if the current route is the login or forgot password page
+    const isLoginPage = location.pathname === '/login';
+    const isForgotPasswordPage = location.pathname === '/forgot-password';
+  
+    // Render the side panel only if the current route is not the login or forgot password page
+    if (isLoginPage || isForgotPasswordPage) {
+      return null;
+    }
 
   return (
     <div className={`side-panel ${expanded ? 'expanded' : 'collapsed'}`}>

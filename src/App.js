@@ -6,6 +6,8 @@ import TopBar from './components/TopBar';
 import SidePanel from './components/SidePanel';
 import UserTable from './components/UserTable';
 import GymActivity from './components/GymActivity';
+import LoginPage from './components/LoginPage';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
@@ -26,6 +28,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/users" element={<UserTable />} />
             <Route path="/activity" element={<GymActivity />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Render ForgotPassword for /forgot-password route */}
           </Routes>
         </main>
       </div>

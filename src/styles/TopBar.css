@@ -40,3 +40,7 @@
   font-weight: bold;
 }
 
+/* Additional style for authentication pages */
+#top-bar.auth-page {
+  margin-left: -80px;
+}
