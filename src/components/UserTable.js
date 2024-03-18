@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/UserTable.css';
-import NewUserForm from './NewUserForm'; 
+import NewUserWindow from './NewUserWindow';
+import Pagination from './Pagination';
+
 
 const UserTable = () => {
     // Placeholder user data
@@ -54,41 +56,9 @@ const UserTable = () => {
         console.log(`Edit clicked for user ID: ${userId}`);
     };
 
-    // Pagination - Change page
+
+    // Modularized pagination function
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-// Function to open/close new user form in a new window
-const toggleForm = () => {
-    const windowFeatures = 'width=400,height=400,resizable,scrollbars=yes';
-
-    if (newUserWindow && !newUserWindow.closed) {
-        newUserWindow.close();
-        setNewUserWindow(null);
-    } else {
-        const newWindow = window.open('', 'New User', windowFeatures);
-
-        if (newWindow) {
-            newWindow.document.title = 'New User';
-
-            // Clear existing content if any
-            newWindow.document.body.innerHTML = '';
-
-            // Render the new user form in the new window
-            const formContainer = newWindow.document.createElement('div');
-            formContainer.setAttribute('id', 'newUserForm');
-            newWindow.document.body.appendChild(formContainer);
-
-            const newUserForm = document.getElementById('newUserFormContainer').cloneNode(true);
-            newUserForm.style.display = 'block';
-            formContainer.appendChild(newUserForm);
-
-            // Ensure that newUserWindow is properly set
-            setNewUserWindow(newWindow);
-        } else {
-            console.error('Failed to open new window. Popup blocker may be enabled.');
-        }
-    }
-};
 
     return (
         <div>
@@ -133,19 +103,16 @@ const toggleForm = () => {
                 </tbody>
             </table>
             {/* Pagination */}
-            <div className="pagination">
-                {Array.from({ length: Math.ceil(filteredUsers.length / usersPerPage) }).map((_, index) => (
-                    <button key={index + 1} onClick={() => paginate(index + 1)}>{index + 1}</button>
-                ))}
-            </div>
-            <div className="new-user-button-container">
-                <button onClick={toggleForm}>New User</button>
-            </div>
-                        {/* New User Form Container */}
-                        <div id="newUserFormContainer" style={{ display: 'none' }}>
-                {newUserWindow && <NewUserForm onClose={toggleForm} />}
-            </div>
-
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(filteredUsers.length / usersPerPage)}
+                paginate={paginate}
+            />
+             {/* New User Window */}
+             <NewUserWindow
+                newUserWindow={newUserWindow}
+                setNewUserWindow={setNewUserWindow}
+            />
         </div>
     );
 };

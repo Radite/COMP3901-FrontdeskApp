@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../styles/NewUserForm.css'; 
+
 
 const NewUserForm = ({ addUser, onClose }) => {
     const [formData, setFormData] = useState({
@@ -29,7 +31,7 @@ const NewUserForm = ({ addUser, onClose }) => {
     };
 
     return (
-        <div>
+        <div className="new-user-form">
             <h2>Create New User</h2>
             <form onSubmit={handleSubmit}>
                 <div>
