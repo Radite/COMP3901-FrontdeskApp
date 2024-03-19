@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import '../styles/UserTable.css';
 import NewUserWindow from './NewUserWindow';
 import Pagination from './Pagination';
+import EditUserWindow from './EditUserWindow';
+import Modal from './Modal';
+
 
 
 const UserTable = () => {
@@ -22,6 +25,13 @@ const UserTable = () => {
         setSearchQuery(event.target.value);
     };
 
+    
+
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [showEditWindow, setShowEditWindow] = useState(false);
+  
+
+  
 
     useEffect(() => {
         // Fetch user data from the backend
@@ -42,11 +52,20 @@ const UserTable = () => {
     const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
     // Function to handle edit click
-    const handleEditClick = userId => {
-        // Logic to handle edit button click, such as redirecting to edit page
-        console.log(`Edit clicked for user ID: ${userId}`);
-    };
+    const handleEditClick = (user) => {
+        setSelectedUser(user);
+        setShowEditWindow(true);
+      };
 
+      const handleSaveUser = (editedUser) => {
+        // Logic to save the edited user information
+        console.log('Saving edited user:', editedUser);
+        setShowEditWindow(false);
+      };
+    
+      const handleCloseEditWindow = () => {
+        setShowEditWindow(false);
+      };
 
     // Modularized pagination function
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -86,7 +105,7 @@ const UserTable = () => {
                         <td>{user.email}</td>
                         <td>{user.role}</td>
                         <td>
-                                <button onClick={() => handleEditClick(user.id)}>Edit</button>
+                                <button onClick={() => handleEditClick(user)}>Edit</button>
                             </td>
                         </tr>
                     ))}
@@ -97,7 +116,14 @@ const UserTable = () => {
                 currentPage={currentPage}
                 totalPages={Math.ceil(filteredUsers.length / usersPerPage)}
                 paginate={paginate}
-            />
+            />{showEditWindow && 
+                <Modal isOpen={showEditWindow} onClose={handleCloseEditWindow}>
+                  <EditUserWindow 
+                    user={selectedUser} 
+                    onSaveUser={handleSaveUser} 
+                  />
+                </Modal>
+              }
              {/* New User Window */}
              <NewUserWindow
                 newUserWindow={newUserWindow}
