@@ -17,7 +17,7 @@ const UserTable = () => {
     const usersPerPage = 10;
 
     // New user form state
-    const [newUserWindow, setNewUserWindow] = useState(null);
+    const [newUserWindow, setNewUserWindow] = useState(false); // Changed to false to initially hide the new user window
 
     // Handle search query change
     const handleSearchChange = event => {
@@ -27,6 +27,11 @@ const UserTable = () => {
 
     
 
+        // Function to handle click on the "New User" button
+        const handleNewUserClick = () => {
+            setNewUserWindow(true); // Show the new user window when the button is clicked
+        };
+        
     const [selectedUser, setSelectedUser] = useState(null);
     const [showEditWindow, setShowEditWindow] = useState(false);
   
@@ -81,6 +86,25 @@ const UserTable = () => {
         setShowEditWindow(false);
       };
 
+      const handleSaveNewUser = (newUser) => {
+        fetch('http://localhost:3001/', { // replace with your server URL
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newUser),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          // You can close the modal and refresh the user list here
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+      };
+      
+
     // Modularized pagination function
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -134,15 +158,20 @@ const UserTable = () => {
                 <Modal isOpen={showEditWindow} onClose={handleCloseEditWindow}>
                   <EditUserWindow 
                     user={selectedUser} 
-                    onSaveUser={handleSaveUser} 
+                    onSave={handleSaveUser} 
                   />
                 </Modal>
               }
-             {/* New User Window */}
-             <NewUserWindow
-                newUserWindow={newUserWindow}
-                setNewUserWindow={setNewUserWindow}
-            />
+                {newUserWindow && 
+                <Modal isOpen={newUserWindow} onClose={() => setNewUserWindow(false)}>
+                    <NewUserWindow 
+                    onSave={handleSaveNewUser} 
+                    onClose={() => setNewUserWindow(false)}
+                    />
+                </Modal>
+                }
+                            {/* Button to open the new user window */}
+            <button onClick={handleNewUserClick}>New User</button>
         </div>
     );
 };

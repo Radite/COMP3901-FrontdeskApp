@@ -1,54 +1,78 @@
-import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import NewUserForm from './NewUserForm';
-import newUserFormStyles from '../styles/NewUserForm.css'; // Import the CSS
+import React, { useState } from 'react';
+import '../styles/NewUserWindow.css';
 
-const NewUserWindow = ({ newUserWindow, setNewUserWindow }) => {
-    const windowFeatures = 'width=400,height=400,resizable,scrollbars=yes';
+const NewUserWindow = ({ onSave, onClose }) => {
+  const [newUser, setNewUser] = useState({
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: ''
+  });
 
-    useEffect(() => {
-        if (newUserWindow) {
-            newUserWindow.document.title = 'New User';
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
+  };
 
-            // Clear existing content if any
-            newUserWindow.document.body.innerHTML = '';
+  const handleSave = () => {
+    onSave(newUser);
+  };
 
-            // Inject CSS into the new window
-            const styleElement = newUserWindow.document.createElement('style');
-            styleElement.textContent = newUserFormStyles;
-            newUserWindow.document.head.appendChild(styleElement);
-
-            // Render the new user form in the new window
-            const formContainer = newUserWindow.document.createElement('div');
-            newUserWindow.document.body.appendChild(formContainer);
-
-            // Render NewUserForm component inside the formContainer
-            ReactDOM.render(<NewUserForm />, formContainer);
-        }
-    }, [newUserWindow]);
-
-    const openNewUserWindow = () => {
-        const newWindow = window.open('', 'New User', windowFeatures);
-
-        if (newWindow) {
-            setNewUserWindow(newWindow);
-        } else {
-            console.error('Failed to open new window. Popup blocker may be enabled.');
-        }
-    };
-
-    const closeNewUserWindow = () => {
-        if (newUserWindow && !newUserWindow.closed) {
-            newUserWindow.close();
-            setNewUserWindow(null);
-        }
-    };
-
-    return (
-        <div>
-            <button onClick={openNewUserWindow}>New User</button>
-        </div>
-    );
+  return (
+    <div className="new-user-window">
+      <h2>Create New User</h2>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          value={newUser.username}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>First Name:</label>
+        <input
+          type="text"
+          name="firstName"
+          value={newUser.firstName}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Last Name:</label>
+        <input
+          type="text"
+          name="lastName"
+          value={newUser.lastName}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Email:</label>
+        <input
+          type="text"
+          name="email"
+          value={newUser.email}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div>
+        <label>Role:</label>
+        <input
+          type="text"
+          name="role"
+          value={newUser.role}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="button-group">
+        <button onClick={handleSave}>Save</button>
+        <button onClick={onClose}>Cancel</button>
+      </div>
+    </div>
+  );
 };
 
 export default NewUserWindow;
