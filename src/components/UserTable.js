@@ -56,12 +56,26 @@ const UserTable = () => {
         setSelectedUser(user);
         setShowEditWindow(true);
       };
-
-      const handleSaveUser = (editedUser) => {
-        // Logic to save the edited user information
-        console.log('Saving edited user:', editedUser);
-        setShowEditWindow(false);
-      };
+      
+      const handleSaveUser = (newUser) => {
+        fetch(`http://localhost:3001/api/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('User saved successfully:', data);
+            // Add the new user to the existing list of users
+            setUsers([...users, data]);
+        })
+        .catch(error => console.error('Error saving user:', error));
+    
+        // Close the new user window after saving
+        setNewUserWindow(null);
+    };
     
       const handleCloseEditWindow = () => {
         setShowEditWindow(false);
