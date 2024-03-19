@@ -3,6 +3,9 @@ import '../styles/Dashboard.css';
 
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [gymCapacity, setGymCapacity] = useState(null);
+  const [upcomingCheckouts, setUpcomingCheckouts] = useState([]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -11,6 +14,50 @@ const Dashboard = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  
+  useEffect(() => {
+    // Fetch gym capacity from backend
+    fetch('http://localhost:3001/api/checkins/count')
+      .then(response => response.json())
+      .then(data => setGymCapacity(data.count))
+      .catch(error => console.error('Error fetching gym capacity:', error));
+  }, []);
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+  
+      // Fetch gym capacity from backend
+      fetch('http://localhost:3001/api/checkins')
+        .then(response => response.json())
+        .then(data => {
+          const filteredCheckouts = data.filter(checkin => {
+            const expirationTimeUTC = new Date(checkin.expiration_time); // Parse ISO 8601 string to Date object
+            return expirationTimeUTC > new Date(); // Compare with current time
+          });
+          setUpcomingCheckouts(filteredCheckouts);
+        })
+        .catch(error => console.error('Error fetching checkins:', error));
+    }, 1000);
+  
+    return () => clearInterval(interval);
+  }, []);
+  
+  
+  // Function to format date and calculate time left
+  const formatDate = dateString => {
+    const date = new Date(dateString);
+    return `${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  };
+
+  const calculateTimeLeft = expirationTime => {
+    const expirationDate = new Date(expirationTime);
+    const timeLeftMs = expirationDate - currentTime;
+    const timeLeftMinutes = Math.floor(timeLeftMs / (1000 * 60));
+    return `${timeLeftMinutes} minutes`;
+  };
 
   // Mock data for recent check-ins
   const recentCheckins = [
@@ -21,11 +68,6 @@ const Dashboard = () => {
     { id: 5, name: "Eve White", idNumber: "567890", checkinTime: "2024-03-13T10:35:00" }
   ];
 
-  // Placeholder data for upcoming checkouts
-  const upcomingCheckouts = [
-    { id: 1, name: "Alice Smith", idNumber: "234567", checkinTime: "2024-03-13T10:45:00" },
-    { id: 2, name: "Bob Johnson", idNumber: "678901", checkinTime: "2024-03-13T10:50:00" }
-  ];
 
   return (
     <div className="dashboard">
@@ -40,7 +82,7 @@ const Dashboard = () => {
         <section className="gym-capacity">
           <div className="icon"><i className="fas fa-user"></i></div>
           <h2>Gym Capacity</h2>
-          <p>20</p>
+          <p>{gymCapacity !== null ? gymCapacity : 'Loading...'}</p>
         </section>
       </header>
 
@@ -59,10 +101,10 @@ const Dashboard = () => {
           <tbody>
             {upcomingCheckouts.map(checkout => (
               <tr key={checkout.id}>
-                <td>{checkout.name}</td>
-                <td>{checkout.idNumber}</td>
-                <td>{new Date(checkout.checkinTime).toLocaleString()}</td>
-                <td>Calculating...</td> {/* Placeholder for time left */}
+                <td>{checkout.user.username}</td>
+                <td>{checkout.user.ID_number}</td>
+                <td>{formatDate(checkout.checkin_time)}</td>
+                <td>{calculateTimeLeft(checkout.expiration_time)}</td>
                 <td><button disabled>Checkout</button></td> {/* Disabled button as placeholder */}
               </tr>
             ))}
