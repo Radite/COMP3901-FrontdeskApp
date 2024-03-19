@@ -1,29 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/UserTable.css';
 import NewUserWindow from './NewUserWindow';
 import Pagination from './Pagination';
 
 
 const UserTable = () => {
-    // Placeholder user data
-    const [users, setUsers] = useState([
-        { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
-        { id: 3, name: 'Alice Johnson', email: 'alice@example.com', role: 'User' },
-        { id: 4, name: 'Bob Brown', email: 'bob@example.com', role: 'User' },
-        { id: 5, name: 'David Lee', email: 'david@example.com', role: 'User' },
-        { id: 6, name: 'Emma Thompson', email: 'emma@example.com', role: 'User' },
-        { id: 7, name: 'Michael Smith', email: 'michael@example.com', role: 'User' },
-        { id: 8, name: 'Olivia Wilson', email: 'olivia@example.com', role: 'User' },
-        { id: 9, name: 'Sophia Davis', email: 'sophia@example.com', role: 'User' },
-        { id: 10, name: 'William Harris', email: 'william@example.com', role: 'User' },
-        { id: 11, name: 'Emily Clark', email: 'emily@example.com', role: 'User' },
-        { id: 12, name: 'James Turner', email: 'james@example.com', role: 'User' },
-        { id: 13, name: 'Isabella White', email: 'isabella@example.com', role: 'User' },
-        { id: 14, name: 'Benjamin King', email: 'benjamin@example.com', role: 'User' },
-        { id: 15, name: 'Ella Martinez', email: 'ella@example.com', role: 'User' },
-        { id: 16, name: 'Alexander Scott', email: 'alexander@example.com', role: 'User' },
-    ]);
+    const [users, setUsers] = useState([]);
 
     // Search query state
     const [searchQuery, setSearchQuery] = useState('');
@@ -40,9 +22,18 @@ const UserTable = () => {
         setSearchQuery(event.target.value);
     };
 
+
+    useEffect(() => {
+        // Fetch user data from the backend
+        fetch('http://localhost:3001/api/users')
+            .then(response => response.json())
+            .then(data => setUsers(data))
+            .catch(error => console.error('Error fetching users:', error));
+    }, []);
+
     // Filter users based on search query
     const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(searchQuery.toLowerCase())
+        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     // Get current users for pagination
@@ -88,14 +79,13 @@ const UserTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentUsers.map(user => (
+                {currentUsers.map((user, index) => (
                         <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{                                user.role}
-                            </td>
-                            <td>
+                            <td>{indexOfFirstUser + index + 1}</td>
+                        <td>{`${user.firstName} ${user.lastName}`}</td>
+                        <td>{user.email}</td>
+                        <td>{user.role}</td>
+                        <td>
                                 <button onClick={() => handleEditClick(user.id)}>Edit</button>
                             </td>
                         </tr>
