@@ -101,8 +101,8 @@ const Dashboard = () => {
           <tbody>
             {upcomingCheckouts.map(checkout => (
               <tr key={checkout.id}>
-                <td>{checkout.user.username}</td>
-                <td>{checkout.user.ID_number}</td>
+                <td>{checkout.name}</td>
+                <td>{checkout.idNumber}</td>
                 <td>{formatDate(checkout.checkin_time)}</td>
                 <td>{calculateTimeLeft(checkout.expiration_time)}</td>
                 <td><button disabled>Checkout</button></td> {/* Disabled button as placeholder */}
