@@ -5,6 +5,8 @@ const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [gymCapacity, setGymCapacity] = useState(null);
   const [upcomingCheckouts, setUpcomingCheckouts] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
+
 
 
   useEffect(() => {
@@ -29,14 +31,17 @@ const Dashboard = () => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
   
-      // Fetch gym capacity from backend
       fetch('http://localhost:3001/api/checkins')
         .then(response => response.json())
         .then(data => {
           const filteredCheckouts = data.filter(checkin => {
-            const expirationTimeUTC = new Date(checkin.expiration_time); // Parse ISO 8601 string to Date object
-            return expirationTimeUTC > new Date(); // Compare with current time
+            const expirationTimeUTC = new Date(checkin.expiration_time);
+            return expirationTimeUTC > new Date();
           });
+  
+          const userIds = filteredCheckouts.map(checkout => checkout.user_id);
+          fetchUserDetails(userIds);
+          
           setUpcomingCheckouts(filteredCheckouts);
         })
         .catch(error => console.error('Error fetching checkins:', error));
@@ -45,6 +50,22 @@ const Dashboard = () => {
     return () => clearInterval(interval);
   }, []);
   
+  const fetchUserDetails = (userIds) => {
+    userIds.forEach(userId => {
+      fetch(`http://localhost:3001/api/users/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+          setUserDetails(prevState => ({
+            ...prevState,
+            [userId]: {
+              name: `${data.firstName} ${data.lastName}`, // concatenate firstName and lastName
+              idNumber: data.ID_number // changed from data.ID_Number
+            }
+          }));
+        })
+        .catch(error => console.error(`Error fetching user details for user ID ${userId}:`, error));
+    });
+  };
   
   // Function to format date and calculate time left
   const formatDate = dateString => {
@@ -101,8 +122,8 @@ const Dashboard = () => {
           <tbody>
             {upcomingCheckouts.map(checkout => (
               <tr key={checkout.id}>
-                <td>{checkout.name}</td>
-                <td>{checkout.idNumber}</td>
+<td>{userDetails[checkout.user_id] ? userDetails[checkout.user_id].name : 'Loading...'}</td>
+      <td>{userDetails[checkout.user_id] ? userDetails[checkout.user_id].idNumber : 'Loading...'}</td>
                 <td>{formatDate(checkout.checkin_time)}</td>
                 <td>{calculateTimeLeft(checkout.expiration_time)}</td>
                 <td><button disabled>Checkout</button></td> {/* Disabled button as placeholder */}
