@@ -1,6 +1,6 @@
 // useRecentCheckins.js
 import { useState, useEffect } from 'react';
-import { fetchUserDetails } from '../../components/helpers/Dashboard//fetchUserDetails'; 
+import { fetchUserDetails } from './fetchUserDetails'; 
 export const useRecentCheckins = (currentTime) => {
   const [recentCheckins, setRecentCheckins] = useState([]);
 

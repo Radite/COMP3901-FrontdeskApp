@@ -1,7 +1,7 @@
 // UpcomingCheckoutsTable.js
 import React, { useState } from 'react';
 import { formatDate, calculateTimeLeft } from '../../components/helpers/Dashboard/dateHelpers'; 
-import Pagination from '../../components/helpers/Pagination'; 
+import Pagination from '../../components/helpers/General/Pagination'; 
 
 const UpcomingCheckoutsTable = ({ upcomingCheckouts, userDetails, currentTime }) => {
   const [currentPage, setCurrentPage] = useState(1);

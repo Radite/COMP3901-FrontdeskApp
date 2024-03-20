@@ -1,7 +1,7 @@
 // RecentCheckinsTable.js
 import React, { useState } from 'react';
 import { formatDate } from '../../components/helpers/Dashboard/dateHelpers'; 
-import Pagination from '../../components/helpers/Pagination'; 
+import Pagination from '../../components/helpers/General/Pagination'; 
 
 const RecentCheckinsTable = ({ recentCheckins }) => {
   const [currentPage, setCurrentPage] = useState(1);

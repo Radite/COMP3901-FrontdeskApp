@@ -4,7 +4,7 @@ import { useGymCapacity } from '../../components/helpers/Dashboard/useGymCapacit
 import { useCurrentTime } from '../../components/helpers/Dashboard/useCurrentTime';
 import { useUpcomingCheckouts } from '../../components/helpers/Dashboard/useUpcomingCheckouts';
 import UpcomingCheckoutsTable from './UpcomingCheckoutsTable'; 
-import { useRecentCheckins } from './useRecentCheckins'; 
+import { useRecentCheckins } from '../../components/helpers/Dashboard/useRecentCheckins'; 
 import RecentCheckinsTable from './recentCheckinsTable'; 
 import CurrentTime from './CurrentTime'; 
 import GymCapacity from './GymCapacity'; 

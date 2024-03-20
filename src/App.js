@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import './App.css';
 import TopBar from './components/TopBar';
 import SidePanel from './components/SidePanel';
-import UserTable from './components/UserTable';
+import UserTable from './components/Users/UserTable';
 import GymActivity from './components/GymActivity';
 import LoginPage from './components/LoginPage';
 import ForgotPassword from './components/ForgotPassword';

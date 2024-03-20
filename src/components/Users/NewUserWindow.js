@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/NewUserWindow.css';
+import '../../styles/NewUserWindow.css';
+import saveUser from '../helpers/Users/SaveUser';
+
 
 const NewUserWindow = ({ onSave, onClose }) => {
   const [newUser, setNewUser] = useState({
@@ -16,7 +18,8 @@ const NewUserWindow = ({ onSave, onClose }) => {
   };
 
   const handleSave = () => {
-    onSave(newUser);
+    console.log(newUser); // Log the newUser object
+    saveUser(newUser).then(() => onClose());
   };
 
   return (

@@ -1,8 +1,9 @@
+//EditWindow.js
 import React, { useState } from 'react';
-import '../styles/EditUserWindow.css';
+import '../../styles/EditUserWindow.css';
 
 
-const EditUserWindow = ({ user, onSave, onClose }) => {
+const EditUserWindow = ({ user, onSave, onClose, setShowEditWindow, updateUsers }) => {
   const [editedUser, setEditedUser] = useState(user);
 
   const handleInputChange = (e) => {
@@ -20,7 +21,7 @@ const EditUserWindow = ({ user, onSave, onClose }) => {
     }
     
     // Send PATCH request with only the edited fields
-    fetch(`http://localhost:3001/api/users/${user._id}`, { // Use user._id instead of user.id
+    fetch(`http://localhost:3001/api/users/${user._id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -30,13 +31,13 @@ const EditUserWindow = ({ user, onSave, onClose }) => {
     .then(response => response.json())
     .then(data => {
       console.log('User updated successfully:', data);
-      // Update the user list with the updated user
-      // You may need to implement this logic based on your application
+      updateUsers(data); // Call the updateUsers function with the updated user
     })
     .catch(error => console.error('Error updating user:', error));
     
     // Close the edit user window
     onClose();
+
   };
   
   
@@ -72,16 +73,19 @@ const EditUserWindow = ({ user, onSave, onClose }) => {
       </div>
       <div>
         <label>Role:</label>
-        <input
-          type="text"
-          name="role"
-          value={editedUser.role}
-          onChange={handleInputChange}
-        />
+        <select
+        name="role"
+        value={editedUser.role}
+        onChange={handleInputChange}
+    >
+        <option value="">Select a role...</option>
+        <option value="admin">Admin</option>
+        <option value="trainer">Trainer</option>
+    </select>
       </div>
       <div className="button-group">
-        <button onClick={handleSave}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+      <button onClick={handleSave}>Save</button>
+                <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
