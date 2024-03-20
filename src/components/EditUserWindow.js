@@ -11,9 +11,35 @@ const EditUserWindow = ({ user, onSave, onClose }) => {
   };
 
   const handleSave = () => {
-    onSave(editedUser);
+    // Filter out unchanged fields
+    const editedFields = {};
+    for (const key in editedUser) {
+      if (editedUser[key] !== user[key]) {
+        editedFields[key] = editedUser[key];
+      }
+    }
+    
+    // Send PATCH request with only the edited fields
+    fetch(`http://localhost:3001/api/users/${user._id}`, { // Use user._id instead of user.id
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedFields),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('User updated successfully:', data);
+      // Update the user list with the updated user
+      // You may need to implement this logic based on your application
+    })
+    .catch(error => console.error('Error updating user:', error));
+    
+    // Close the edit user window
+    onClose();
   };
-
+  
+  
   return (
     <div className="edit-user-window">
       <h2>Edit User</h2>

@@ -60,6 +60,7 @@ const UserTable = () => {
     const handleEditClick = (user) => {
         setSelectedUser(user);
         setShowEditWindow(true);
+        console.log('Selected User:', user); // Log selectedUser object
       };
       
       const handleSaveUser = (newUser) => {
@@ -159,6 +160,7 @@ const UserTable = () => {
                   <EditUserWindow 
                     user={selectedUser} 
                     onSave={handleSaveUser} 
+                    onClose={handleCloseEditWindow} 
                   />
                 </Modal>
               }
