@@ -5,7 +5,7 @@ import './App.css';
 import TopBar from './components/TopBar';
 import SidePanel from './components/SidePanel';
 import UserTable from './components/Users/UserTable';
-import GymActivity from './components/GymActivity';
+import GymActivity from './components/Activity/GymActivity';
 import LoginPage from './components/LoginPage';
 import ForgotPassword from './components/ForgotPassword';
 

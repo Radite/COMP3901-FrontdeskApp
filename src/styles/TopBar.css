@@ -44,3 +44,13 @@
 #top-bar.auth-page {
   margin-left: -80px;
 }
+
+.notification {
+  color: white;
+}
+
+.notification:hover {
+  color: blue;
+}
+
+

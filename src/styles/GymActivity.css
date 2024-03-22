@@ -11,7 +11,7 @@
 .top-section {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Align children at the start of the container */
   width: 100%;
   padding: 20px;
   background-color: #f5f5f5; /* Light grey background for a softer look */
@@ -30,7 +30,7 @@
   align-items: center;
   background-color: #484444;
   color: white;
-  top: -120px; /* Adjust the top position */
+  top: 0px; /* Adjust the top position */
 }
 
 .notification-text {
@@ -39,14 +39,6 @@
 
 .notification-count {
   font-size: 24px;
-}
-
-.chart-wrapper-weekly {
-  width: calc(50% - 20px); /* Adjusted width for two charts with margin */
-  border: 2px solid #ccc; /* Border color */
-  border-radius: 15px; /* Rounded edges */
-  margin-bottom: 20px;
-  overflow: hidden; /* Ensure chart doesn't overflow border */
 }
 
 .chart-wrapper-daily {
@@ -88,4 +80,86 @@
 
 .NotificationsTable tbody tr:hover {
   background-color: #f9f9f9;
+}
+
+.WeeklyVisitorsChart {
+  width: 100%; /* Ensure the chart occupies the full width of its container */
+  height: 400px; /* Adjust the height as needed */
+}
+
+.WeeklyVisitorsChart .chart-wrapper-weekly {
+  width: 100%; /* Set the width to occupy full space */
+  border: 2px solid #ccc; /* Border color */
+  border-radius: 15px; /* Rounded edges */
+  margin-bottom: 20px;
+  overflow: hidden; /* Ensure chart doesn't overflow border */
+}
+
+/* Adjust the style of the chart itself */
+.WeeklyVisitorsChart .chart-wrapper-weekly .recharts-wrapper {
+  margin-top: 10px; /* Adjust the top margin */
+}
+
+/* Style the tooltip if needed */
+.WeeklyVisitorsChart .chart-wrapper-weekly .recharts-tooltip {
+  background-color: rgba(255, 255, 255, 0.9); /* Background color for tooltip */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded edges */
+  padding: 5px 10px; /* Padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadows for depth */
+  font-family: 'Roboto', sans-serif; /* Modern, clean font */
+  font-size: 14px; /* Font size */
+  color: #333; /* Text color */
+}
+
+/* Style the tooltip label */
+.WeeklyVisitorsChart .chart-wrapper-weekly .recharts-tooltip-label {
+  margin-bottom: 5px; /* Adjust bottom margin */
+  font-weight: bold; /* Bold font weight */
+}
+
+/* Style the tooltip value */
+.WeeklyVisitorsChart .chart-wrapper-weekly .recharts-tooltip-item-value {
+  color: #888; /* Adjust text color */
+}
+
+.WeeklyVisitorsChart h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.WeeklyVisitorsChart p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.WeeklyVisitorsChart button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.WeeklyVisitorsChart button:hover {
+  background-color: #45a049;
+}
+
+.WeeklyVisitorsChart button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.chart-wrapper-weekly {
+  border: 2px solid #000; /* Change the color as needed */
+  border-radius: 10px; /* Adjust as needed */
+  padding: 10px; /* Adjust as needed */
+  height: 380px; /* Adjust this value as needed */
 }
